@@ -1,14 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+// import Layout from '@/layout/index.vue';
+import { getToken } from '@/utils/auth.js'
+
+
+NProgress.configure({ showSpinner: false })
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
     path: '/about',
@@ -20,10 +27,32 @@ Vue.use(VueRouter)
   }
 ]
 
+const Domain = ['login', 'test']
+
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // Start progress bar
+  NProgress.start()
+  const TOKEN = getToken()
+  if (!TOKEN && !Domain.includes(to.name)) {
+    next({
+      name: 'login'
+    })
+  } else {
+    next()
+  }
+})
+
+router.afterEach(() => {
+  // Finish progress bar
+  NProgress.done()
+
+  // document.title = `${TITLE}-${to.meta.title || '' }`
 })
 
 export default router
