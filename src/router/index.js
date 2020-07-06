@@ -17,6 +17,10 @@ const routes = [
     name: 'login',
     component: () => import('@/views/login/index.vue')
   }, {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/error/404.vue')
+  }, {
     path: '/',
     component: Layout,
     children: [
@@ -29,7 +33,7 @@ const routes = [
         component: () => import('@/views/test/index.vue')
       }, {
         path: '/home',
-        name: 'home',
+        name: 'tran-home',
         meta: {
           title: ''
         },
@@ -46,7 +50,7 @@ const routes = [
   }
 ]
 
-const Domain = ['login', 'test']
+const Domain = ['login', '404', 'test']
 
 const router = new VueRouter({
   // mode: 'history',
