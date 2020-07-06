@@ -21,23 +21,29 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: 'test',
+        path: '/test',
         name: 'test',
         meta: {
           title: '测试页面'
         },
         component: () => import('@/views/test/index.vue')
+      }, {
+        path: '/home',
+        name: 'home',
+        meta: {
+          title: ''
+        },
+        component: () => import('@/views/train/index.vue')
+      }, {
+        path: '/query',
+        name: 'train-query',
+        meta: {
+          title: '车票查询'
+        },
+        component: () => import('@/views/train/index.vue')
       }
     ]
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import('@/views/About.vue')
-  // }
 ]
 
 const Domain = ['login', 'test']
@@ -51,7 +57,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // Start progress bar
   NProgress.start()
-  const TOKEN = getToken()
+  const TOKEN = getToken() || '12121212'
   if (!TOKEN && !Domain.includes(to.name)) {
     next({
       name: 'login'
@@ -65,7 +71,7 @@ router.afterEach((to) => {
   // Finish progress bar
   NProgress.done()
 
-  document.title = `${to.meta.title || '' }`
+  document.title = `Train tickets - ${to.meta.title || '' }`
 })
 
 export default router
