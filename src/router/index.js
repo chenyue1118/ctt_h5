@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-// import Layout from '@/layout/index.vue';
+import Layout from '@/layout/index.vue';
 import { getToken } from '@/utils/auth.js'
 
 
@@ -13,18 +13,31 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue')
+  }, {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/Home.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('@/views/About.vue')
+    component: Layout,
+    children: [
+      {
+        path: 'test',
+        name: 'test',
+        meta: {
+          title: '测试页面'
+        },
+        component: () => import('@/views/test/index.vue')
+      }
+    ]
   }
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import('@/views/About.vue')
+  // }
 ]
 
 const Domain = ['login', 'test']
@@ -48,11 +61,11 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to) => {
   // Finish progress bar
   NProgress.done()
 
-  // document.title = `${TITLE}-${to.meta.title || '' }`
+  document.title = `${to.meta.title || '' }`
 })
 
 export default router

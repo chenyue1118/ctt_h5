@@ -3,6 +3,8 @@ import Vue from 'vue'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
+import '@/style/index.less'
+import '@/style/transition.less'
 import 'normalize.css'
 import 'lib-flexible/flexible.js'
 

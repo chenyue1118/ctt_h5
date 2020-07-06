@@ -44,11 +44,11 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
+    // response响应码 200 -> 响应正确
     if (res.code !== 200) {
       Toast.fail(res.message || 'Error')
 
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      // token 失效 ， 需要重新登录
       if (res.code === 700 || res.code === 701) {
         removeToken()
         store.mutations.LOG_OUT()
