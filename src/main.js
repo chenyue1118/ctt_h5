@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
+import moment from 'moment'
 
 import '@/style/index.less'
 import '@/style/transition.less'
@@ -15,6 +16,9 @@ import store from './store'
 Vue.use(Vant)
 
 Vue.config.productionTip = false
+
+moment.locale('zh-cn')
+window.moment = moment
 
 new Vue({
   router,

@@ -6,10 +6,16 @@ import MyStorage from '@/utils/cache.js'
 
 Vue.use(Vuex)
 
+/*
+ *     用户信息根据存储的token解析
+ * 1，当前搜索数据存储，起点、终点、日期
+ * 2，选择车次信息
+*/
+
 export default new Vuex.Store({
   state: {
     token: getToken(),
-    userInfo: MyStorage.getItem('userInfo') || ''
+    userInfo: MyStorage.getItem('userInfo') || '',
   },
   getters: {
     token: state => {
