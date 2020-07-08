@@ -39,6 +39,13 @@ const routes = [
         },
         component: () => import('@/views/train/index.vue')
       }, {
+        path: '/address',
+        name: 'train-address',
+        meta: {
+          title: '车站输入'
+        },
+        component: () => import('@/views/train/address.vue')
+      }, {
         path: '/query',
         name: 'train-query',
         meta: {
