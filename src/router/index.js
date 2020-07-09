@@ -51,7 +51,7 @@ const routes = [
         meta: {
           title: '车票查询'
         },
-        component: () => import('@/views/train/index.vue')
+        component: () => import('@/views/train/query.vue')
       }
     ]
   }

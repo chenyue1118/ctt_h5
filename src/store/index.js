@@ -16,6 +16,9 @@ export default new Vuex.Store({
   state: {
     token: getToken(),
     userInfo: MyStorage.getItem('userInfo') || '',
+    queryInfo: MyStorage.getItem('queryInfo') || { time: '' },
+    hotCity: [{'py':'beijingbei','pyC':'Beijingbei','name':'北京北','code':'VAP'}, {'py':'shanghainan','pyC':'Shanghainan','name':'上海南','code':'SNH'}],
+    hisCity: [{"py":"beijing","pyC":"Beijing","name":"北京","code":"BJP"}]
   },
   getters: {
     token: state => {
@@ -23,6 +26,15 @@ export default new Vuex.Store({
     },
     userInfo: state => {
       return state.userInfo
+    },
+    queryInfo: state => {
+      return state.queryInfo
+    },
+    hotCity: state => {
+      return state.hotCity
+    },
+    hisCity: state => {
+      return state.hisCity
     },
   },
   mutations: {
@@ -33,6 +45,14 @@ export default new Vuex.Store({
     SET_USERINFO: (state, userInfo) => {
       MyStorage.setItem('userInfo', userInfo)
       state.userInfo = userInfo
+    },
+    SET_QUSRYINFO: (state, queryInfo) => {
+      MyStorage.setItem('queryInfo', queryInfo)
+      state.queryInfo = queryInfo
+    },
+    SET_HISCITY: (state, hisCity) => {
+      MyStorage.setItem('hisCity', hisCity)
+      state.hisCity = hisCity
     },
     LOG_OUT: (state) => {
       MyStorage.clear()

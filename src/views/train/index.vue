@@ -2,30 +2,92 @@
   <div class="train-guide">
     <img class="content-bg" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1594208304&di=1937f444bda5da91f6cf6e2de6c26def&src=http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg" />
     <div class="guide-content">
-      <div class="content-title">火车票预订</div>
+      <div class="content-title">Train ticket booking</div>
       <div class="content-guide">
         <div class="content-input">
-          <a class="input-address">Start address</a>
+          <a class="input-address" @click="selectAddress('start')">{{ homeSearch.start }}</a>
           <span class="input-line">-</span>
-          <a class="input-address">End address</a>
+          <a class="input-address" @click="selectAddress('end')">{{ homeSearch.end }}</a>
         </div>
         <div class="content-input">
-          <a class="input-timer">Select time</a>
+          <a class="input-timer" @click="selectTime">{{ homeSearch.time }}</a>
         </div>
         <div class="content-btn">
-          <a class="input-btn">Find</a>
+          <a class="input-btn" @click="linkQuery">Find</a>
         </div>
       </div>
     </div>
     <div class="guide-seize"></div>
+    <van-popup v-model="dateShow" position="bottom">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        title="Select date"
+        confirm-button-text="Confirm"
+        cancel-button-text="Cancel"
+        :min-date="minDate"
+        @confirm="confirmDate"
+        @cancel="cancelDate"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'train-guide',
+  computed: {
+    ...mapGetters(['queryInfo']),
+    homeSearch() {
+      return {
+        start: (this.queryInfo && this.queryInfo.start && this.queryInfo.start.pyC) || 'Start address',
+        end: (this.queryInfo && this.queryInfo.end && this.queryInfo.end.pyC) || 'End address',
+        time: (this.queryInfo && this.queryInfo.time) || 'Select time'
+      }
+    }
+  },
   data() {
-    return {}
+    return {
+      dateShow: false,
+      currentDate: new Date(),
+      minDate: new Date(),
+    }
+  },
+  methods: {
+    ...mapMutations({
+      set_queryinfo: 'SET_QUSRYINFO'
+    }),
+    // 日期确认
+    confirmDate() {
+      this.dateShow = false
+      const query = this.queryInfo || {}
+      query.time = window.moment(this.currentDate).format('YYYY-MM-DD')
+      this.set_queryinfo(query)
+    },
+    cancelDate() {},
+    selectTime() {
+      this.dateShow = true
+    },
+    // 地址输入跳转
+    selectAddress(type) {
+      this.$router.push({
+        path: `/address?type=${type}`
+      })
+    },
+    linkQuery() {
+      if (
+        this.queryInfo &&
+        this.queryInfo.start &&
+        this.queryInfo.end &&
+        this.queryInfo.time
+      ) {
+        this.$router.push({
+          path: '/query'
+        })
+      }
+    }
   }
 }
 </script>
