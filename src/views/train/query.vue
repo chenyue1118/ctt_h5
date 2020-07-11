@@ -25,7 +25,11 @@
       loading-text="Loading...">
       <div class="query-result">
         <div class="result-items">
-          <div class="result-item" v-for="(item, index) in resultList" :key="index">
+          <div
+            class="result-item"
+            v-for="(item, index) in resultList"
+            :key="index"
+            @click="linkBook">
             <div class="item-detail">
               <div class="detail-number">G507{{item}}</div>
               <div class="detail-address">
@@ -331,16 +335,24 @@ export default {
       // this.set_queryinfo(query)
     },
     cancelDate() {},
+    // 设置时间
     selectTime() {
       this.dateShow = true
     },
     goback() {
       this.$router.go(-1)
     },
+    // 下拉刷新
     onRefresh() {
       setTimeout(() => {
         this.isLoading = false
       }, 2000)
+    },
+    // 跳转订单确认页面
+    linkBook() {
+      this.$router.push({
+        path: '/confirmation'
+      })
     },
     // 设置过滤状态
     setFilter(type) {
