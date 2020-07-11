@@ -12,7 +12,12 @@
           <span class="timer-txt">2020-07-11</span>
           <i class="time-icon"></i>
         </div>
-        <span class="header-info-up">After</span>
+        <span class="header-info-up"></span>
+      </div>
+    </div>
+    <div class="confirmation-content">
+      <div class="confirmation-result">
+
       </div>
     </div>
   </div>

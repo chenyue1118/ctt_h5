@@ -52,6 +52,13 @@ const routes = [
           title: '车票查询'
         },
         component: () => import('@/views/train/query.vue')
+      }, {
+        path: '/confirmation',
+        name: 'train-confirmation',
+        meta: {
+          title: '订单确认'
+        },
+        component: () => import('@/views/train/confirmation.vue')
       }
     ]
   }
