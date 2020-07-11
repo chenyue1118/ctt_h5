@@ -135,7 +135,7 @@ export default {
         height: 40px;
         line-height: 40px;
         color: #fff;
-        font-size: 24px;
+        font-size: 20px;
       }
       .back-icon-hide {
         opacity: 0;
