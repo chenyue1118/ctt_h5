@@ -59,6 +59,65 @@ const routes = [
           title: '订单确认'
         },
         component: () => import('@/views/train/confirmation.vue')
+      }, {
+        path: '/book',
+        name: 'train-book',
+        meta: {
+          title: '下订单'
+        },
+        component: () => import('@/views/train/book.vue')
+      }, {
+        path: '/add-child',
+        name: 'add-child',
+        meta: {
+          title: '添加儿童信息'
+        },
+        component: () => import('@/views/train/add-child.vue')
+      }, {
+        path: '/add-adult',
+        name: 'add-adult',
+        meta: {
+          title: '添加成人信息'
+        },
+        component: () => import('@/views/train/add-adult.vue')
+      }, {
+        path: '/hotel-address',
+        name: 'hotel-address',
+        meta: {
+          title: '选择旅馆地址'
+        },
+        component: () => import('@/views/train/hotel-address.vue')
+      }, {
+        path: '/personal-address',
+        name: 'personal-address',
+        meta: {
+          title: '选择旅馆地址'
+        },
+        component: () => import('@/views/train/personal-address.vue')
+      }, {
+        path: '/help',
+        name: 'help',
+        meta: {
+          title: '帮助页面'
+        },
+        component: Layout,
+        children: [
+          {
+            path: '/',
+            name: 'help-list',
+            meta: {
+              title: '帮助页面'
+            },
+            component: () => import('@/views/train/help/index.vue')
+          }
+        ]
+      }, {
+        path: '/train-pay',
+        name: 'train-pay',
+        meta: {
+          title: '订单支付'
+        },
+        component: () => import('@/views/train/personal-address.vue')
       }
     ]
   }

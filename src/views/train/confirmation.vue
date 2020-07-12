@@ -44,7 +44,7 @@
           <span class="book-seat">1st Class</span>
           <span class="book-price">USD124.6</span>
           <span class="book-status">Yes</span>
-          <span class="book-btn">Book</span>
+          <span class="book-btn" @click="linkTo">Book</span>
         </div>
         <div class="book-items">
           <span class="book-seat">2st Class</span>
@@ -69,6 +69,11 @@ export default {
   methods: {
     goback() {
       this.$router.go(-1)
+    },
+    linkTo() {
+      this.$router.push({
+        path: '/book'
+      })
     }
   }
 }

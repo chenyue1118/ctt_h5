@@ -21,8 +21,8 @@
     </div>
     <van-pull-refresh
       v-model="isLoading"
-      @refresh="onRefresh"
-      loading-text="Loading...">
+      @refresh="onRefresh">
+      <!-- loading-text="Loading..." -->
       <div class="query-result">
         <div class="result-items">
           <div
